@@ -45,4 +45,27 @@ describe Hydra::Works::VirusScanner do
       is_expected.not_to be_infected
     end
   end
+
+  context 'integration tests' do
+    before(:all) do
+      require 'clamav'
+      ClamAV.instance.loaddb
+    end
+    
+    context "when it's infected" do
+      let(:file) { File.join(fixture_path, 'eicar.txt')}
+
+      it 'finds a virus' do
+        is_expected.to be_infected
+      end
+    end
+
+    context "when it's clean" do
+      let(:file) { File.join(fixture_path, 'piano_note.wav')}
+
+      it 'finds no virus' do
+        is_expected.not_to be_infected
+      end
+    end
+  end
 end
