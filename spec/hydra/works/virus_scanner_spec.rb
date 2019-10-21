@@ -47,7 +47,7 @@ describe Hydra::Works::VirusScanner do
   end
 
   context 'Clamby integration tests' do
-    before(:all) do
+    before do
       require 'clamby'
     end
 
